@@ -1,0 +1,73 @@
+<%= form_for(@sta_item) do |f| %>
+  <% if @sta_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sta_item.errors.count, "error") %> prohibited this sta_item from being saved:</h2>
+
+      <ul>
+      <% @sta_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :by %><br>
+    <%= f.text_field :by %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.number_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </div>
+  <div class="field">
+    <%= f.label :parent %><br>
+    <%= f.number_field :parent %>
+  </div>
+  <div class="field">
+    <%= f.label :kids %><br>
+    <%= f.text_area :kids %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_area :url %>
+  </div>
+  <div class="field">
+    <%= f.label :score %><br>
+    <%= f.number_field :score %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </div>
+  <div class="field">
+    <%= f.label :parts %><br>
+    <%= f.text_area :parts %>
+  </div>
+  <div class="field">
+    <%= f.label :descendants %><br>
+    <%= f.text_area :descendants %>
+  </div>
+  <div class="field">
+    <%= f.label :updated %><br>
+    <%= f.number_field :updated %>
+  </div>
+  <div class="field">
+    <%= f.label :deleted %><br>
+    <%= f.check_box :deleted %>
+  </div>
+  <div class="field">
+    <%= f.label :dead %><br>
+    <%= f.check_box :dead %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

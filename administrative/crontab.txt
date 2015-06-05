@@ -1,0 +1,4 @@
+1	*	*	*	*	bash administrative/warm_cache.sh >> log/warm_cache.log
+0	23	*	*	1	bash administrative/clean_cache.sh >> log/warm_cache.log
+
+

@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @sta_item.type %>
+</p>
+
+<p>
+  <strong>By:</strong>
+  <%= @sta_item.by %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @sta_item.time %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @sta_item.text %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @sta_item.parent %>
+</p>
+
+<p>
+  <strong>Kids:</strong>
+  <%= @sta_item.kids %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @sta_item.url %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @sta_item.score %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @sta_item.title %>
+</p>
+
+<p>
+  <strong>Parts:</strong>
+  <%= @sta_item.parts %>
+</p>
+
+<p>
+  <strong>Descendants:</strong>
+  <%= @sta_item.descendants %>
+</p>
+
+<p>
+  <strong>Updated:</strong>
+  <%= @sta_item.updated %>
+</p>
+
+<p>
+  <strong>Deleted:</strong>
+  <%= @sta_item.deleted %>
+</p>
+
+<p>
+  <strong>Dead:</strong>
+  <%= @sta_item.dead %>
+</p>
+
+<%= link_to 'Edit', edit_sta_item_path(@sta_item) %> |
+<%= link_to 'Back', sta_items_path %>

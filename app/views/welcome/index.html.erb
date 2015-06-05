@@ -1,0 +1,147 @@
+
+  <% content_for :title do %>
+  <%= @keywords.join(' vs. ') %>
+  <% end %>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">           
+            <%=image_tag 'logo_black.png', :style => 'margin-top: -10px' %>
+        </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li ><a href="/suggest">Suggested Searches</a></li>
+            <li class="active"><a href="/search">Search</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://twitter.com/owocki" target=new>Built by @owocki</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <div class="jumbotron">
+        <h2>Hacker News Trends</h2>
+      </div>
+
+
+      <div class="page-header">
+        <h1>Enter some keywords:</h1>
+        <form action="/redir/" >
+          <div class="row">
+            <% [0,1,2,3,4].each do | i | %>
+              <div class="col-md-2">
+              <input type="text" placeholder="keyword #<%=(i+1)%>" name='k[<%=i%>]' value="<%= @keywords[i] %>" />
+              </div>
+            <% end %>
+              <div class="col-md-2">
+             <input  type='submit' class="btn btn-lg btn-primary" value="See Trends" />
+            </div>
+            </div>
+        </form>
+       </div>
+
+      <% if @search_results.length > 0 and @search_results[0]['posts'].length > 0  %>
+        <div class="page-header">
+          <h1>Found some posts:</h1>
+          <ul>
+          <% @search_results.each do | search_results | %>
+            <li><%=search_results['total_entries'] %> for <%=search_results['keyword']%></li>
+          <% end %>
+          </ul>
+
+          <ul class="nav nav-tabs" role="tablist">
+           <% @grains.each do | each_grain | %>
+              <li role="presentation" class="<%= 'active' if each_grain == @grain; %>"><a href="<%=@uri.gsub(@grain,each_grain)%>"><%=each_grain%> grain</a></li>
+          <% end %>
+          </ul>
+          <%= high_chart("chart", @chart) %>
+
+          <ul class="nav nav-tabs" role="tablist">
+           <% @search_results.each do | search_results | %>
+              <li role="presentation" class="<%= 'active' if search_results['keyword'] == @search_results[0]['keyword']; %>"><a href="#<%=search_results['keyword']%>"><%=search_results['keyword']%></a></li>
+          <% end %>
+          </ul>
+           <% @search_results.each do | search_results | %>
+          <% counter = 0 %>
+            <div class='postlist'>
+            
+            <% if search_results['total_entries'] != @slice_at  %> 
+            <a type="button" href="<%=@uri.gsub(@slice_at.to_s,search_results['total_entries'].to_s) %>" class="btn btn-lg btn-primary pull-right">Show all</a>
+            <% end %>
+
+            <h3 id="<%=search_results['keyword']%>">Displaying first <%= @slice_at %>  of <%= search_results['total_entries'] %> posts for keyword '<%=search_results['keyword']%>':</h3>
+            <ol>
+            <div class="list-group">
+              <% search_results['posts'].slice(0,@slice_at).each do |post| %>
+                <a href="<%=post['url']%>" target=new class="list-group-item">
+                  <h4 class="list-group-item-heading"><%=(counter=counter+1)%> - <%=post['title_ui']%></h4>
+                  <p class="list-group-item-text">by <%= post['by'] %> @ <%= post['time_ui'] %>.</p>
+                </a>
+            <% end %>
+           </div>
+          </div>
+
+      <% end %>
+        </div>
+      <% end %>
+
+
+    </div> <!-- /container -->
+
+<script type="text/javascript">
+
+var fireEvent = function(element, event) {
+    var evt;
+    var isString = function(it) {
+        return typeof it == "string" || it instanceof String;
+    }
+    element = (isString(element)) ? document.getElementById(element) : element;
+    if (document.createEventObject) {
+        // dispatch for IE
+        evt = document.createEventObject();
+        return element.fireEvent('on' + event, evt)
+    }
+    else {
+        // dispatch for firefox + others
+        evt = document.createEvent("HTMLEvents");
+        evt.initEvent(event, true, true); // event type,bubbling,cancelable
+        return !element.dispatchEvent(evt);
+    }
+}
+
+  //force chart reload b/c high charts isnt playing nice with caching
+  var reloadChart = function () {
+    if ( $('#chart').html().length == 0 ){
+        fireEvent(document,"page:load");      
+      if(typeof window.onload == 'function')
+        window.onload();
+    }
+
+    if(typeof window.chart_chart  != 'undefined'){
+      if ( $('#chart').html().length == 0 )
+        window.chart_chart = new Highcharts.Chart(window.chart_chart.options);
+    }
+  };
+
+  reloadChart();
+  setTimeout(reloadChart,1000);
+  setTimeout(reloadChart,2000);
+  setTimeout(reloadChart,3000);
+  setTimeout(reloadChart,5000);
+
+
+
+</script>
+

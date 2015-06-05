@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  by: 
+  time: 1
+  text: MyText
+  parent: 1
+  kids: MyText
+  url: MyText
+  score: 1
+  title: MyText
+  parts: MyText
+  descendants: MyText
+  updated: 1
+  deleted: false
+  dead: false
+
+two:
+  type: 
+  by: 
+  time: 1
+  text: MyText
+  parent: 1
+  kids: MyText
+  url: MyText
+  score: 1
+  title: MyText
+  parts: MyText
+  descendants: MyText
+  updated: 1
+  deleted: false
+  dead: false

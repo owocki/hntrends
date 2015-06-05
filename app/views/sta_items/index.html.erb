@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Sta Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>By</th>
+      <th>Time</th>
+      <th>Text</th>
+      <th>Parent</th>
+      <th>Kids</th>
+      <th>Url</th>
+      <th>Score</th>
+      <th>Title</th>
+      <th>Parts</th>
+      <th>Descendants</th>
+      <th>Updated</th>
+      <th>Deleted</th>
+      <th>Dead</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sta_items.each do |sta_item| %>
+      <tr>
+        <td><%= sta_item.type %></td>
+        <td><%= sta_item.by %></td>
+        <td><%= sta_item.time %></td>
+        <td><%= sta_item.text %></td>
+        <td><%= sta_item.parent %></td>
+        <td><%= sta_item.kids %></td>
+        <td><%= sta_item.url %></td>
+        <td><%= sta_item.score %></td>
+        <td><%= sta_item.title %></td>
+        <td><%= sta_item.parts %></td>
+        <td><%= sta_item.descendants %></td>
+        <td><%= sta_item.updated %></td>
+        <td><%= sta_item.deleted %></td>
+        <td><%= sta_item.dead %></td>
+        <td><%= link_to 'Show', sta_item %></td>
+        <td><%= link_to 'Edit', edit_sta_item_path(sta_item) %></td>
+        <td><%= link_to 'Destroy', sta_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sta item', new_sta_item_path %>

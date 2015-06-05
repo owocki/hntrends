@@ -1,0 +1,65 @@
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">           
+            <%=image_tag 'logo_black.png', :style => 'margin-top: -10px' %>
+        </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/suggest">Suggested Searches</a></li>
+            <li ><a href="/search">Search</a></li>
+            <li ><a href="/about">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://twitter.com/owocki" target=new>Built by @owocki</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Hacker News Trends</h2>
+        <p>Search HN for keyword trends from 2007 to 2015.</p>
+      <a type="button" href="#suggested_header" class="btn btn-lg btn-primary pull-right">See Suggested Searches</a>
+      <br/>
+
+      </div>
+      <div class="page-header">
+      </div>
+      <div class="page-header">
+      <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title" id="suggested_header">
+                Suggested Searches                
+              </h3>
+            </div>
+            <div class="panel-body">
+
+            <div class="list-group">
+              <% counter = 0; %>
+              <% @suggest.each do |item| %>
+                <a href="<%=item['url']%>" class="list-group-item">
+                  <button type="button" href="#suggested_header" class="btn btn-lg btn-success pull-right">See It</button>
+                  <h4 class="list-group-item-heading"><%=(counter=counter+1)%> - <%=item['title']%></h4>
+                  <p class="list-group-item-text"><%= item['desc'] %>.</p>
+                </a>
+            <% end %>
+           </div>
+
+        </div>
+      </div>
+    </div>
+    </div> <!-- /container -->
+
